@@ -58,3 +58,9 @@ Asimismo, para asegurar la correcta dirección de las escalas, se procedió a in
 - **Meritocracia (Predictor 3):** Se construyó a partir de la batería C18 (ítems c18_09 y c18_10, escala Likert 1–5), que evalúa la atribución del éxito a factores individuales como el esfuerzo y las habilidades. El ítem c18_13 (“En Chile las personas tienen igualdad de oportunidades para salir adelante”) fue excluido del índice debido a su correlación negativa con el resto de la escala, evidenciada mediante el coeficiente Alfa de Cronbach. Los ítems restantes se mantuvieron en su dirección original, de modo que valores más altos indican mayor adhesión a creencias meritocráticas. El índice fue calculado como el promedio de los ítems.
 
 **Tabla explicativa de variables seleccionadas**
+
+```{r paquetes}
+library(psych)        # Análisis factorial exploratorio
+library(GPArotation)  # Rotación Oblimin
+library(cluster)      # Evaluación de los grupos con silueta
+```
