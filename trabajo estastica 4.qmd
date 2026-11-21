@@ -76,3 +76,5 @@ varelsoc19 <- elsoc19 %>% select(r13_sexo_01, r13_edad_01, g01_01, g01_02, g01_0
 
 
 ```
+
+prueba
