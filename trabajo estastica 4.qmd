@@ -27,7 +27,323 @@ La **teoría del sexismo ambivalente** distingue entre el sexismo hostil, que ex
 
 En este marco, la pregunta que guía este estudio es: **¿En qué medida el respaldo al principio de igualdad de oportunidades se traduce en un rechazo a priorizar a los hombres cuando escasea el empleo?**
 
-## 
+## 2. Paquetes y carga de la base de datos
+
+```{r paquetes}
+# Instala solo los paquetes que falten
+paquetes <- c(
+  "haven",        # Importar la base .sav de ELSOC
+  "dplyr",        # Seleccionar y limpiar variables
+  "psych",        # Correlaciones policóricas, KMO, Bartlett, Horn y AFE
+  "GPArotation",  # Rotación Oblimin
+  "FactoMineR",   # Análisis de correspondencias simple (ACS)
+  "factoextra",   # Gráficos de correspondencias
+  "ggplot2",      # Personalizar gráficos
+  "knitr"        # Tablas para el documento Quarto
+)
+
+faltantes <- setdiff(paquetes, rownames(installed.packages()))
+
+if (length(faltantes) > 0) {
+  install.packages(faltantes, repos = "https://cloud.r-project.org")
+}
+
+# Carga los paquetes
+invisible(lapply(paquetes, library, character.only = TRUE))
+```
+
+```{r instalar-paquetes, eval=FALSE}
+install.packages(c("haven", "psych", "GPArotation", "FactoMineR", "knitr"))
+```
+
+```{r cargar-base}
+# Dejamos el archivo .sav en la misma carpeta que este documento.
+ruta_base <- "ELSOC_W04_v2.01 (2).sav"
+
+if (!file.exists(ruta_base)) {
+  stop("No se encontró la base. Revisa el nombre y la ruta en `ruta_base`.")
+}
+
+elsoc19 <- haven::read_sav(ruta_base)
+names(elsoc19) <- tolower(names(elsoc19))
+
+nrow(elsoc19)
+```
+
+## 3. Selección y limpieza de variables
+
+Partimos de 12 preguntas. El bloque G01 mide actitudes de género. C18 aporta preguntas sobre jerarquía e igualdad entre grupos, y D02 sobre la justificación de privilegios económicos.
+
+```{r seleccionar-limpiar}
+items_afe <- c(
+  "g01_01", "g01_02", "g01_03", "g01_04", "g01_05",
+  "c18_01", "c18_12", "c18_02", "c18_03",
+  "d02_01", "d02_02", "d02_03"
+)
+
+faltantes <- setdiff(items_afe, names(elsoc19))
+if (length(faltantes) > 0) {
+  stop("Faltan estas variables: ", paste(faltantes, collapse = ", "))
+}
+
+# Conservamos las categorías válidas de 1 a 5.
+# Los códigos de no respuesta y demás valores fuera de rango pasan a NA.
+datos_afe <- as.data.frame(lapply(elsoc19[items_afe], function(x) {
+  x <- as.numeric(haven::zap_missing(x))
+  x[!x %in% 1:5] <- NA_real_
+  x
+}))
+
+# Para el AFE, los valores altos indican mayor oposición a la igualdad.
+datos_afe$c18_02 <- 6 - datos_afe$c18_02
+datos_afe$c18_03 <- 6 - datos_afe$c18_03
+
+knitr::kable(data.frame(
+  Item = names(datos_afe),
+  Respuestas_perdidas = colSums(is.na(datos_afe))
+), row.names = FALSE)
+
+# Usamos los mismos casos para comparar todas las soluciones.
+datos_afe_completos <- datos_afe[complete.cases(datos_afe), ]
+
+n <- nrow(datos_afe_completos)
+
+c(
+  casos_originales = nrow(datos_afe),
+  casos_completos = n,
+  casos_excluidos = nrow(datos_afe) - n
+)
+```
+
+La base original tenía **3.417 casos**. Se trabajó con **3.245 casos completos** y se excluyeron 172 por respuestas faltantes en alguno de los 12 ítems iniciales.
+
+## 4. Descriptivos de las variables
+
+Mostramos el porcentaje de respuestas en cada categoría para los 12 ítems. En esta tabla, C18_02 y C18_03 ya están invertidos.
+
+```{r descriptivos}
+porcentajes_items <- t(vapply(
+  datos_afe_completos,
+  function(x) 100 * prop.table(table(factor(x, levels = 1:5))),
+  numeric(5)
+))
+
+colnames(porcentajes_items) <- paste("Respuesta", 1:5)
+knitr::kable(round(porcentajes_items, 1))
+```
+
+## 5. AFE · Pertinencia de los 12 ítems iniciales
+
+Usamos correlaciones policóricas para el AFE porque los ítems son ordinales. Calculamos KMO sobre esa matriz. Para la prueba clásica de Bartlett usamos la matriz de Pearson.
+
+```{r factorabilidad}
+R_policorica <- psych::polychoric(datos_afe_completos)$rho
+R_pearson <- cor(datos_afe_completos)
+
+kmo_afe <- psych::KMO(R_policorica)
+round(kmo_afe$MSA, 2)
+round(sort(kmo_afe$MSAi), 2)
+
+psych::cortest.bartlett(R_pearson, n = n)
+```
+
+El KMO general fue **0,73** y los MSA individuales estuvieron entre **0,68 y 0,89**. Bartlett dio **χ²(66) = 9.402,60, p \< 0,001**.
+
+## 6. AFE · Comparación de soluciones y selección de ítems
+
+Estimamos los factores con **MINRES** y rotación **Oblimin**, que permite que las dimensiones se correlacionen. Comparamos soluciones de tres y cuatro factores manteniendo los mismos casos.
+
+```{r afe-doce-items}
+# Análisis paralelo de Horn con los 12 ítems.
+set.seed(123)
+horn_afe <- psych::fa.parallel(
+  datos_afe_completos,
+  fa = "fa", fm = "minres", cor = "poly", n.iter = 100
+)
+horn_afe$nfact
+
+# Reutilizamos la misma configuración para comparar soluciones.
+ajustar_afe <- function(items, factores) {
+  psych::fa(
+    R_policorica[items, items],
+    nfactors = factores,
+    n.obs = n,
+    fm = "minres",
+    rotate = "oblimin"
+  )
+}
+
+afe_4 <- ajustar_afe(items_afe, 4)
+afe_3 <- ajustar_afe(items_afe, 3)
+
+print(afe_4$loadings, cutoff = 0, digits = 2)
+print(afe_3$loadings, cutoff = 0, digits = 2)
+
+round(c(
+  comunalidad_g0105_en_4 = afe_4$communalities[["g01_05"]],
+  comunalidad_g0105_en_3 = afe_3$communalities[["g01_05"]]
+), 2)
+```
+
+G01_05, sobre prioridad laboral masculina, tuvo una comunalidad de aproximadamente **0,23** en ambas soluciones. Lo retiramos de la extracción factorial y lo conservamos para analizarlo por separado.
+
+```{r afe-once-items}
+items_afe_sin_g0105 <- setdiff(items_afe, "g01_05")
+
+afe_3_sin_g0105 <- ajustar_afe(items_afe_sin_g0105, 3)
+afe_4_sin_g0105 <- ajustar_afe(items_afe_sin_g0105, 4)
+
+print(afe_3_sin_g0105$loadings, cutoff = 0, digits = 2)
+print(afe_4_sin_g0105$loadings, cutoff = 0, digits = 2)
+round(afe_4_sin_g0105$communalities, 3)
+```
+
+Con 11 ítems, la solución de cuatro factores mostraba un factor de jerarquía grupal dominado por C18_01, con una comunalidad de **0,995**. C18_12 también cargaba en otro factor. Probamos retirar ambos ítems de jerarquía para revisar si las demás dimensiones quedaban más claras.
+
+```{r afe-nueve-items}
+items_afe_9 <- setdiff(items_afe_sin_g0105, c("c18_01", "c18_12"))
+
+set.seed(123)
+horn_afe_9 <- psych::fa.parallel(
+  datos_afe_completos[, items_afe_9],
+  fa = "fa", fm = "minres", cor = "poly", n.iter = 100
+)
+horn_afe_9$nfact
+
+afe_3_9 <- ajustar_afe(items_afe_9, 3)
+afe_4_9 <- ajustar_afe(items_afe_9, 4)
+
+print(afe_3_9$loadings, cutoff = 0, digits = 2)
+print(afe_4_9$loadings, cutoff = 0, digits = 2)
+round(afe_4_9$communalities, 3)
+```
+
+## 7. AFE · Resultados de la solución final
+
+Retuvimos **cuatro factores con nueve ítems**. Horn sugirió cuatro y la solución permitió distinguir el sexismo hostil del benevolente.
+
+| Dimensión | Ítems | Cargas principales |
+|-----------------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------|
+| Justificación de privilegios económicos | D02_01 a D02_03 | 0,71 a 0,95 |
+| Oposición a la igualdad entre grupos | C18_02 y C18_03, invertidos | 0,93 y 0,76 |
+| Sexismo hostil | G01_03 y G01_04 | 0,94 y 0,50 |
+| Sexismo benevolente | G01_01 y G01_02 | 0,72 y 0,61 |
+
+Tres dimensiones tienen solo dos indicadores, por lo que la solución se interpreta como exploratoria.
+
+```{r correlaciones-entre-factores}
+round(afe_4_9$Phi, 2)
+```
+
+La justificación de privilegios económicos y la oposición a la igualdad se correlacionaron en **0,43**. Los dos tipos de sexismo se correlacionaron en **0,40**. Las correlaciones entre las dimensiones de sexismo y las de desigualdad estuvieron cerca de cero.
+
+## 8. Análisis complementario · Spearman
+
+Calculamos puntuaciones factoriales estimadas y las correlacionamos con G01_05, que quedó fuera del AFE. Spearman toma en cuenta el orden de las respuestas.
+
+```{r spearman-prioridad}
+puntajes <- psych::factor.scores(
+  datos_afe_completos[, items_afe_9],
+  afe_4_9,
+  method = "Thurstone"
+)$scores
+
+dimensiones <- c(
+  MR1 = "Justificación de privilegios económicos",
+  MR3 = "Oposición a la igualdad entre grupos",
+  MR2 = "Sexismo hostil",
+  MR4 = "Sexismo benevolente"
+)
+
+rho <- cor(
+  puntajes[, names(dimensiones)],
+  datos_afe_completos$g01_05,
+  method = "spearman"
+)
+
+knitr::kable(data.frame(
+  Dimension = unname(dimensiones),
+  Spearman = round(as.numeric(rho), 3)
+))
+```
+
+Las asociaciones fueron positivas y débiles. La mayor fue con **oposición a la igualdad (0,262)**, seguida por privilegios económicos (0,228), sexismo hostil (0,170) y sexismo benevolente (0,132). Este orden es descriptivo.
+
+## 9. ACS · Tabla de contingencia y prueba de independencia
+
+Cruzamos **G01_05**, prioridad laboral masculina cuando escasea el empleo, con **C18_02**, apoyo a la igualdad de oportunidades entre grupos. Recuperamos el sentido original de C18_02 para leer el gráfico y la tabla como en el cuestionario.
+
+```{r tabla-acs}
+niveles_acuerdo <- c(
+  "Totalmente en desacuerdo",
+  "En desacuerdo",
+  "Ni de acuerdo ni en desacuerdo",
+  "De acuerdo",
+  "Totalmente de acuerdo"
+)
+
+tabla_acs <- table(
+  Prioridad = factor(
+    datos_afe_completos$g01_05,
+    levels = 1:5,
+    labels = niveles_acuerdo
+  ),
+  Igualdad = factor(
+    6 - datos_afe_completos$c18_02,
+    levels = 1:5,
+    labels = niveles_acuerdo
+  )
+)
+
+knitr::kable(as.data.frame.matrix(tabla_acs))
+```
+
+```{r chi-cuadrado-simulado}
+# Usamos simulación porque hay celdas con frecuencias esperadas pequeñas.
+set.seed(123)
+prueba_chi <- chisq.test(tabla_acs, simulate.p.value = TRUE, B = 9999)
+
+prueba_chi
+min(prueba_chi$expected)
+```
+
+## 10. ACS · Mapa, perfiles y residuos
+
+```{r mapa-acs, fig-width=10, fig-height=6}
+# Diferenciamos en el mapa las categorías de cada pregunta.
+tabla_mapa <- as.data.frame.matrix(tabla_acs)
+rownames(tabla_mapa) <- paste("Prioridad —", rownames(tabla_mapa))
+names(tabla_mapa) <- paste("Igualdad —", names(tabla_mapa))
+
+acs_prioridad <- FactoMineR::CA(tabla_mapa, graph = FALSE)
+
+knitr::kable(round(acs_prioridad$eig, 2))
+
+plot(
+  acs_prioridad,
+  title = "Prioridad laboral masculina e igualdad de oportunidades",
+  cex = 0.7
+)
+```
+
+```{r perfiles-y-residuos-acs}
+# Cada columna suma aproximadamente 100 %.
+# Leemos la distribución de prioridad dentro de cada nivel de igualdad.
+porcentajes_acs <- 100 * prop.table(tabla_acs, margin = 2)
+knitr::kable(round(porcentajes_acs, 1))
+
+# Residuo positivo: combinación más frecuente que bajo independencia.
+# Residuo negativo: combinación menos frecuente que bajo independencia.
+knitr::kable(round(prueba_chi$stdres, 2))
+```
+
+El primer eje del ACS concentró el **98,0 % de la inercia**. Entre quienes estaban **totalmente de acuerdo** con la igualdad, el **42,0 %** rechazó totalmente la prioridad laboral masculina. Entre quienes estaban **de acuerdo** con la igualdad, el rechazo total fue del **14,0 %**. La combinación de apoyo total a la igualdad y rechazo total a la prioridad tuvo un residuo de **+17,84**.
+
+También hubo un **3,6 %** que apoyó totalmente la prioridad masculina dentro del grupo que apoyaba totalmente la igualdad. Esa combinación apareció más de lo esperado bajo independencia (residuo **+3,44**), aunque fue minoritaria.
+
+## 11. Conclusión
+
+En los casos analizados de ELSOC 2019, el apoyo firme a la igualdad de oportunidades entre grupos se asoció con un rechazo más firme a dar prioridad laboral a los hombres cuando escasea el empleo. La coexistencia de apoyo firme a ambas posturas en una minoría muestra que el respaldo a la igualdad general puede convivir con una preferencia por los hombres en una situación laboral concreta. El análisis describe asociaciones en los casos completos de la muestra.
 
 **Bibliografía**
 
@@ -66,5 +382,3 @@ varelsoc19 <- elsoc19 %>% select(r13_sexo_01, r13_edad_01, g01_01, g01_02, g01_0
 
 
 ```
-
-prueba
