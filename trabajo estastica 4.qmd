@@ -5,59 +5,49 @@ format: html
 editor: visual
 ---
 
-# Sexismo benevolente y legitimación de la desigualdad
+# **Igualdad de oportunidades y sesgo de género ante la escasez de empleo**
 
 **Introducción**
 
-La presente investigación analiza el fenómeno del sexismo en la vida social, poniendo especial atención en sus formas menos evidentes, cotidianas y socialmente aceptadas. Desde esta perspectiva, resulta relevante considerar que no todas estas expresiones se manifiestan de manera explícita o conflictiva; por el contrario, muchas operan a través de prácticas, discursos y normas culturales que contribuyen a la naturalización y legitimación de las diferencias entre hombres y mujeres. En este marco, se considera el sexismo como un fenómeno multidimensional que incluye tanto formas hostiles como benevolentes, las cuales, aunque distintas en su expresión, contribuyen a la reproducción de desigualdades de género.
+Cuando la economía pierde dinamismo, una de las preocupaciones más concretas es la dificultad para encontrar trabajo. Si el producto interno bruto (PIB) cae durante dos trimestres consecutivos respecto del trimestre anterior, una vez descontados los efectos estacionales, se habla de **recesión técnica**. En un escenario de contracción, las empresas pueden postergar inversiones y contratar menos, reduciendo las oportunidades para quienes buscan empleo.
 
-Para abordar esta temática, resulta necesario delimitar conceptualmente el sexismo y sus alcances. En este sentido, el sexismo se entiende como un conjunto de actitudes, creencias y prácticas que establecen y justifican la desigualdad entre hombres y mujeres, sustentadas en la atribución de características diferenciadas según el género y en la legitimación de jerarquías sociales basadas en dichas diferencias (Glick & Fiske, 1996; Pratto et al., 1994). Asimismo, puede comprenderse como un fenómeno de carácter ambivalente, en tanto integra dos dimensiones: el sexismo hostil, que se expresa mediante actitudes abiertamente negativas hacia las mujeres, y el sexismo benevolente, que consiste en evaluaciones subjetivamente positivas que, sin embargo, refuerzan su subordinación a través de la asignación de roles tradicionales. Ambas dimensiones serán consideradas en el análisis, en tanto permiten captar distintas formas de expresión del prejuicio de género. Por su parte, el prejuicio se entiende como una disposición actitudinal negativa hacia grupos sociales, vinculada a la mantención de jerarquías y desigualdades entre grupos (Pratto et al., 1994; Ho et al., 2012).
+En Chile, esa preocupación adquirió relevancia en 2026. El país evitó por poco una recesión técnica, pero entre julio y septiembre el PIB cayó un **1,1 %** respecto del mismo período del año anterior. En esos mismos meses, el desempleo llegó al **9,8 %**, es decir, **1,3 puntos porcentuales** más que un año antes. Estas cifras dan actualidad a una pregunta sobre cómo se distribuyen las oportunidades laborales cuando el trabajo escasea.
 
-A su vez, estas formas de desigualdad pueden ser comprendidas en el marco de la teoría de la dominancia social, la cual plantea que las sociedades humanas tienden a organizarse en sistemas jerárquicos basados en grupos, en los que ciertos grupos mantienen posiciones de poder y privilegio sobre otros, sustentados por ideologías y prácticas que legitiman y reproducen dichas desigualdades (Sidanius & Pratto, 1999).
+la presente investigación examina **si quienes apoyan con más firmeza la igualdad de oportunidades entre grupos también rechazan con más firmeza la prioridad laboral masculina**. Para ello, recurrimos a las respuestas de **ELSOC 2019**, que permiten observar cómo se relaciona un principio general de igualdad con una postura concreta sobre quién debería tener prioridad para acceder al empleo.
 
-Desde esta perspectiva, tanto la teoría del sexismo ambivalente como la teoría de la dominancia social permiten comprender cómo distintas formas de prejuicio de género, tanto de carácter hostil como benevolente, pueden contribuir a la legitimación de jerarquías de género. Sin embargo, en contextos donde se promueven ideales de igualdad, la persistencia de estas prácticas plantea una posible tensión entre principios normativos y formas cotidianas de interacción social.
+## 
 
-A nivel individual, estas dinámicas estructurales se expresan a través de actitudes y percepciones que contribuyen a la reproducción simbólica de dichas jerarquías, manifestándose en orientaciones como el sexismo y las creencias asociadas a la legitimación de la desigualdad social.
+**Marco Teórico**
 
-En función de lo anterior, la investigación se orienta a responder la siguiente pregunta:
+La escasez de empleo plantea una pregunta distributiva: ¿debería el género influir en quién tiene prioridad para acceder a un trabajo? Con datos de ELSOC 2019, examinamos cómo se relaciona el apoyo a un principio general de igualdad de oportunidades entre grupos con la postura frente a una preferencia concreta por los hombres en el acceso al empleo.
 
-**¿En qué medida las distintas formas de sexismo (benevolente y hostil) se asocian con las orientaciones hacia la dominación social y la legitimación de la desigualdad?**
+La **teoría de la dominancia social** permite situar esa preferencia en una discusión más amplia sobre cómo se justifican las jerarquías entre grupos (Sidanius & Pratto, 1999). Pratto et al. (1994) estudian la preferencia por esas jerarquías, y Ho et al. (2015) distinguen entre favorecer la dominación de unos grupos sobre otros y oponerse a la igualdad entre ellos. En este práctico, esa distinción orienta la interpretación de los dos ítems de oposición a la igualdad que retuvimos en el AFE. [assets.cambridge.org](https://assets.cambridge.org/97805218/05407/copyright/9780521805407_copyright.pdf?utm_source=chatgpt.com)
 
-Centrar el análisis en el sexismo como fenómeno multidimensional responde a su capacidad de operar tanto de forma explícita como sutil en la reproducción de desigualdades de género. Mientras el sexismo hostil se manifiesta mediante actitudes abiertamente negativas, el sexismo benevolente se expresa a través de evaluaciones aparentemente positivas que refuerzan roles tradicionales y relaciones de dependencia. En este sentido, ambas dimensiones permiten captar distintas formas en que las jerarquías de género se sostienen en la vida social.
+La **teoría del sexismo ambivalente** distingue entre el sexismo hostil, que expresa actitudes negativas hacia las mujeres, y el benevolente, que combina valoraciones positivas con expectativas tradicionales sobre su rol. Esta distinción ayuda a interpretar por qué los ítems de género se agruparon en dos factores y permite examinar cómo se relaciona cada uno con el apoyo a la prioridad laboral masculina (Glick & Fiske, 1996). [explore.openaire.eu](https://explore.openaire.eu/search/result?pid=10.1037%2F0022-3514.70.3.491&utm_source=chatgpt.com)
 
-A su vez, estas actitudes pueden ser comprendidas en relación con orientaciones más amplias hacia la dominación social, particularmente a través del concepto de orientación a la dominancia social (SDO), entendido como la tendencia individual a preferir y legitimar relaciones jerárquicas entre grupos (Pratto et al., 1994). Desde esta perspectiva, el sexismo puede interpretarse como una expresión específica de dichas orientaciones, en la medida en que contribuye a la mantención de desigualdades estructurales entre hombres y mujeres.
+En este marco, la pregunta que guía este estudio es: **¿En qué medida el respaldo al principio de igualdad de oportunidades se traduce en un rechazo a priorizar a los hombres cuando escasea el empleo?**
 
-A partir de ello, se establece como primera línea de análisis la comparación de los niveles de sexismo, tanto benevolente como hostil, según género y edad, con el objetivo de identificar posibles patrones diferenciales en su distribución. Se plantea la siguiente hipótesis:
+## 
 
-**H1: Los niveles de sexismo, tanto benevolente como hostil, tenderán a ser más elevados en hombres y en personas de mayor edad.**
+**Bibliografía**
 
-En segundo lugar, resulta pertinente analizar la relación entre el sexismo y las orientaciones hacia la legitimación de la desigualdad, en tanto estas permiten evaluar cómo los individuos interpretan y justifican las jerarquías presentes en la estructura social. En esta investigación, se consideran tres dimensiones analíticas: la dominación grupal, que agrupa actitudes favorables a la jerarquía entre grupos; la meritocracia, que atribuye las diferencias sociales a factores individuales como el esfuerzo y las habilidades; y la oposición a la igualdad, entendida como el rechazo a la igualdad de oportunidades entre grupos. En este marco, se formula la siguiente hipótesis:
+- Banco Central de Chile. (2026, 18 de noviembre). *Cuentas nacionales de Chile: Evolución de la actividad económica en el tercer trimestre de 2026*. [www.bcentral.cl](https://www.bcentral.cl/documents/33528/8798042/Cuentas%2BNacionales%2BTercer%2BTrimestre%2B2026.pdf/cb7add8a-7d6a-f4e3-7a11-74fe4c335a64?t=1794950823972&utm_source=chatgpt.com)
 
-**H2: El sexismo, tanto benevolente como hostil, se asociará positivamente con la dominación grupal y las creencias meritocráticas, y negativamente con el igualitarismo.**
+- Instituto Nacional de Estadísticas. (2026, 29 de octubre). *Boletín estadístico: Empleo trimestral. Edición n.º 336*. [www.ine.gob.cl](https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf?trk=article-ssr-frontend-pulse_little-text-block&utm_source=chatgpt.com)
 
-El objetivo general de esta investigación es analizar la relación entre el sexismo, en sus dimensiones benevolente y hostil, y las orientaciones hacia la legitimación de la desigualdad social, así como su variación según características sociodemográficas.
+- López, F. (2026, 18 de noviembre). Chile ‘se quita de encima’ la recesión técnica pero expertos prevén economía cerrando el 2026 en rojo. *BioBioChile*.
 
-**Metodología**
+<!-- -->
 
-El presente estudio utiliza datos de la cuarta ola del Estudio Longitudinal Social de Chile (ELSOC 2019), desarrollado por el Centro de Estudios de Conflicto y Cohesión Social (COES). La población objetivo corresponde a hombres y mujeres entre 18 y 75 años residentes en zonas urbanas del país, y la muestra fue seleccionada mediante un diseño probabilístico, estratificado y multietápico. El tamaño muestral final corresponde aproximadamente a N = 2900 individuos.
+- Glick, P., & Fiske, S. T. (1996). The Ambivalent Sexism Inventory: Differentiating hostile and benevolent sexism. *Journal of Personality and Social Psychology, 70*(3), 491–512. [DOI](https://doi.org/10.1037/0022-3514.70.3.491)
 
-**Operacionalización de las variables**
+- Ho, A. K., Sidanius, J., Kteily, N., Sheehy-Skeffington, J., Pratto, F., Henkel, K. E., Foels, R., & Stewart, A. L. (2015). The nature of social dominance orientation: Theorizing and measuring preferences for intergroup inequality using the new SDO₇ scale. *Journal of Personality and Social Psychology, 109*(6), 1003–1028. [DOI](https://doi.org/10.1037/pspi0000033)
 
-Para capturar los constructos latentes, se construyeron índices a partir del promedio de ítems (“rowMeans”), previa recodificación de valores perdidos y respuestas no sustantivas. En particular, las categorías “No sabe” y “No responde”, codificadas como -888 y -999 respectivamente en la base de datos, fueron transformadas en valores perdidos (NA) antes de cualquier cálculo, con el fin de evitar sesgos en la estimación.
+- Pratto, F., Sidanius, J., Stallworth, L. M., & Malle, B. F. (1994). Social dominance orientation: A personality variable predicting social and political attitudes. *Journal of Personality and Social Psychology, 67*(4), 741–763. [DOI](https://doi.org/10.1037/0022-3514.67.4.741)
 
-Asimismo, para asegurar la correcta dirección de las escalas, se procedió a invertir aquellos ítems redactados en sentido igualitario mediante la fórmula (puntuación máxima + 1) - x, garantizando que valores más altos representen consistentemente una mayor presencia del constructo medido. La consistencia interna de cada escala fue evaluada mediante el coeficiente Alfa de Cronbach.
+- Sidanius, J., & Pratto, F. (1999). *Social dominance: An intergroup theory of social hierarchy and oppression*. Cambridge University Press.
 
-- **Sexismo benevolente (VD1):** Se construyó a partir de la batería G01 (ítems g01_1 y g01_2, escala Likert 1–5: 1 = Totalmente en desacuerdo, 5 = Totalmente de acuerdo), que evalúa creencias que idealizan y refuerzan roles tradicionales de género desde una perspectiva aparentemente positiva. Los ítems se mantuvieron en su dirección original, de modo que valores más altos indican mayor nivel de sexismo benevolente. El índice fue calculado como el promedio de los ítems.
-
-- **Sexismo hostil (VD2):** Se construyó a partir de la batería G01 (ítems g01_3, g01_4 y g01_5, escala Likert 1–5), que evalúa actitudes abiertamente negativas y conflictivas hacia las mujeres. Los ítems se mantuvieron en su dirección original, de modo que valores más altos indican mayor nivel de sexismo hostil. El índice fue calculado como el promedio de los ítems.
-
-- **Dominación grupal (Predictor 1):** Se construyó a partir de la batería C18 (ítems c18_01 y c18_12, escala Likert 1–5: 1 = Totalmente en desacuerdo, 5 = Totalmente de acuerdo), que evalúa actitudes favorables a la jerarquía entre grupos. Los ítems se mantuvieron en su dirección original, de modo que valores más altos indican mayor nivel de legitimación de la desigualdad. El índice fue calculado como el promedio de los ítems.
-
-- **Oposición a la igualdad (Predictor 2):** Se construyó a partir de la batería C18 (ítems c18_02 y c18_03, escala Likert 1–5), que evalúa el apoyo a la igualdad de oportunidades entre grupos. Ambos ítems fueron invertidos para asegurar consistencia direccional, de modo que valores más altos en el índice reflejan una mayor oposición a la igualdad y una mayor orientación hacia la desigualdad. El índice fue calculado como el promedio de los ítems.
-
-- **Meritocracia (Predictor 3):** Se construyó a partir de la batería C18 (ítems c18_09 y c18_10, escala Likert 1–5), que evalúa la atribución del éxito a factores individuales como el esfuerzo y las habilidades. El ítem c18_13 (“En Chile las personas tienen igualdad de oportunidades para salir adelante”) fue excluido del índice debido a su correlación negativa con el resto de la escala, evidenciada mediante el coeficiente Alfa de Cronbach. Los ítems restantes se mantuvieron en su dirección original, de modo que valores más altos indican mayor adhesión a creencias meritocráticas. El índice fue calculado como el promedio de los ítems.
-
-**Tabla explicativa de variables seleccionadas**
+**Fuente de datos.** Centro de Estudios de Conflicto y Cohesión Social (COES). *Estudio Longitudinal Social de Chile (ELSOC), ola 4, levantamiento de 2019, versión 2.01* \[Base de datos\]. [Repositorio ELSOC](https://doi.org/10.7910/DVN/HHOBAQ)
 
 ```{r paquetes}
 library(psych)        # Análisis factorial exploratorio
