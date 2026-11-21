@@ -364,21 +364,3 @@ En los casos analizados de ELSOC 2019, el apoyo firme a la igualdad de oportunid
 - Sidanius, J., & Pratto, F. (1999). *Social dominance: An intergroup theory of social hierarchy and oppression*. Cambridge University Press.
 
 **Fuente de datos.** Centro de Estudios de Conflicto y Cohesión Social (COES). *Estudio Longitudinal Social de Chile (ELSOC), ola 4, levantamiento de 2019, versión 2.01* \[Base de datos\]. [Repositorio ELSOC](https://doi.org/10.7910/DVN/HHOBAQ)
-
-```{r paquetes}
-library(psych)        # Análisis factorial exploratorio
-library(GPArotation)  # Rotación Oblimin
-library(cluster)      # Evaluación de los grupos con silueta
-
-library(tidyverse)
-library(haven)
-library(readxl)
-
-elsoc19 <- read_sav("ELSOC_W04_v2.01 (2).sav")
-
-
-
-varelsoc19 <- elsoc19 %>% select(r13_sexo_01, r13_edad_01, g01_01, g01_02, g01_03, g01_04, g01_05,c18_01,c18_12, c18_02, c18_03, c18_09, c18_10, c18_13)
-
-
-```
