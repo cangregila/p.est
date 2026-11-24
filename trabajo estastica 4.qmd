@@ -52,10 +52,6 @@ if (length(faltantes) > 0) {
 invisible(lapply(paquetes, library, character.only = TRUE))
 ```
 
-```{r instalar-paquetes, eval=FALSE}
-install.packages(c("haven", "psych", "GPArotation", "FactoMineR", "knitr"))
-```
-
 ```{r cargar-base}
 # Dejamos el archivo .sav en la misma carpeta que este documento.
 ruta_base <- "ELSOC_W04_v2.01 (2).sav"
@@ -223,7 +219,7 @@ round(afe_4_9$communalities, 3)
 Retuvimos **cuatro factores con nueve ítems**. Horn sugirió cuatro y la solución permitió distinguir el sexismo hostil del benevolente.
 
 | Dimensión | Ítems | Cargas principales |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Justificación de privilegios económicos | D02_01 a D02_03 | 0,71 a 0,95 |
 | Oposición a la igualdad entre grupos | C18_02 y C18_03, invertidos | 0,93 y 0,76 |
 | Sexismo hostil | G01_03 y G01_04 | 0,94 y 0,50 |
